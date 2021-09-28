@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_001
+      author: Michele Bittencourt
+      changes:
+        - createTable:
+            tableName: TB_USER
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    unique: true
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(200)
+                  constraints:
+                    unique: true
+                    primaryKey: true
+                    nullable: false
