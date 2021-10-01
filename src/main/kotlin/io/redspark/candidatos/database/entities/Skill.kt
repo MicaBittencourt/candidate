@@ -9,9 +9,8 @@ import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-@Table(name = "TB_SKILL")
+@Table(name = "skill")
 data class Skill(
-
     @Id
     @GeneratedValue
     @Column(name = "skill_id")
@@ -21,7 +20,7 @@ data class Skill(
     val name: String,
 
     @ManyToMany(mappedBy = "skillList")
-    var candidateList: List<Candidate>
+    val candidateList: List<Candidate> = emptyList()
 
     ){
 /*constructor(skill: skillDTO) : this(
@@ -37,4 +36,5 @@ data class Skill(
     @LastModifiedDate
     @Column(name = "updated_date")
     lateinit var updatedDate: LocalDateTime
+
 }

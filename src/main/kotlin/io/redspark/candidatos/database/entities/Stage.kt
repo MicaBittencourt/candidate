@@ -9,9 +9,8 @@ import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-@Table(name = "TB_STAGE")
+@Table(name = "stage")
 data class Stage(
-
     @Id
     @GeneratedValue
     @Column(name = "stage_id")
@@ -32,8 +31,8 @@ data class Stage(
     @Column(name = "feedback")
     val feedback: String,
 
-    @OneToOne(targetEntity = Candidate::class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate")
+    @ManyToOne(targetEntity = Candidate::class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "candidate_id")
     val candidate: Candidate,
 
     @Column(name = "user_create")
@@ -42,8 +41,7 @@ data class Stage(
     @Column(name = "user_update")
     val user_update: String
 
-
-    ){
+) {
 /*constructor(stage: stageDTO) : this(
     id = stage.id,
     appointment_date_hour = stage.appointment_date_hour,
@@ -64,4 +62,5 @@ data class Stage(
     @LastModifiedDate
     @Column(name = "updated_date")
     lateinit var updatedDate: LocalDateTime
+
 }

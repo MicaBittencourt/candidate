@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Michele Bittencourt
       changes:
         - createTable:
-            tableName: TB_SKILL_CANDIDATE
+            tableName: skill_candidate
             columns:
               - column:
                   name: candidate_id
@@ -16,25 +16,15 @@ databaseChangeLog:
                   type: uuid
                   constraints:
                     nullable: false
-              - column:
-                  name: created_date
-                  type: TIMESTAMP
-                  constraints:
-                    nullable: false
-              - column:
-                  name: updated_date
-                  type: TIMESTAMP
-                  constraints:
-                    nullable: false
               - addForeignKeyConstraint:
                   baseColumnNames: candidate_id
-                  baseTableName: tb_candidate
-                  constraintName: fk_candidate_skill
+                  baseTableName: skill_candidate
+                  constraintName: fk_skill_candidate_candidate
                   referencedColumnNames: candidate_id
-                  referencedTableName: tb_skill_candidate
+                  referencedTableName: candidate
               - addForeignKeyConstraint:
                   baseColumnNames: skill_id
-                  baseTableName: tb_skill
-                  constraintName: fk_candidate_skill
+                  baseTableName: skill_candidate
+                  constraintName: fk_skill_candidate_skill
                   referencedColumnNames: skill_id
-                  referencedTableName: tb_skill_candidate
+                  referencedTableName: skill

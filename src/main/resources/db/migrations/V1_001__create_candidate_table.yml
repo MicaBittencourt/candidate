@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Michele Bittencourt
       changes:
         - createTable:
-            tableName: TB_CANDIDATE
+            tableName: candidate
             columns:
               - column:
                   name: candidate_id
@@ -17,6 +17,7 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(200)
                   constraints:
+                    unique: true
                     nullable: false
               - column:
                   name: email

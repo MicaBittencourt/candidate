@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Michele Bittencourt
       changes:
         - createTable:
-            tableName: TB_STAGE
+            tableName: stage
             columns:
               - column:
                   name: stage_id
@@ -65,7 +65,7 @@ databaseChangeLog:
                     nullable: false
               - addForeignKeyConstraint:
                   baseColumnNames: candidate_id
-                  baseTableName: tb_candidate
-                  constraintName: fk_candidate_stage
+                  baseTableName: stage
+                  constraintName: fk_stage_candidate
                   referencedColumnNames: candidate_id
-                  referencedTableName: tb_stage_table
+                  referencedTableName: candidate

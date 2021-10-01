@@ -9,9 +9,8 @@ import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-@Table(name = "TB_CANDIDATE")
+@Table(name = "candidate")
 data class Candidate(
-
     @Id
     @GeneratedValue
     @Column(name = "candidate_id")
@@ -40,7 +39,7 @@ data class Candidate(
         name = "skill_candidate",
         joinColumns = [JoinColumn(name = "candidate_id")],
         inverseJoinColumns = [JoinColumn(name = "skill_id")])
-    var skillList: List<Skill>
+    val skillList: List<Skill> = emptyList(),
 
     ){
 /*constructor(candidate: candidateDTO) : this(

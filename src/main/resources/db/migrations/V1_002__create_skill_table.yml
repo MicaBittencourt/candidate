@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Michele Bittencourt
       changes:
         - createTable:
-            tableName: TB_SKILL
+            tableName: skill
             columns:
               - column:
                   name: skill_id
@@ -17,6 +17,7 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(200)
                   constraints:
+                    unique: true
                     nullable: false
               - column:
                   name: created_date
