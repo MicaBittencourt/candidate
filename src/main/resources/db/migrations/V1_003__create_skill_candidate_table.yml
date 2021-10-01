@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_003
+      author: Michele Bittencourt
+      changes:
+        - createTable:
+            tableName: TB_SKILL_CANDIDATE
+            columns:
+              - column:
+                  name: candidate_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: skill_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: candidate_id
+                  baseTableName: tb_candidate
+                  constraintName: fk_candidate_skill
+                  referencedColumnNames: candidate_id
+                  referencedTableName: tb_skill_candidate
+              - addForeignKeyConstraint:
+                  baseColumnNames: skill_id
+                  baseTableName: tb_skill
+                  constraintName: fk_candidate_skill
+                  referencedColumnNames: skill_id
+                  referencedTableName: tb_skill_candidate

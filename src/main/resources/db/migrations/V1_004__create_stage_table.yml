@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_004
+      author: Michele Bittencourt
+      changes:
+        - createTable:
+            tableName: TB_STAGE
+            columns:
+              - column:
+                  name: stage_id
+                  type: uuid
+                  constraints:
+                    unique: true
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: appointment_date_hour
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stage_type
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_status
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: conclusion
+                  type: BOOLEAN
+                  constraints:
+                    nullable: true
+              - column:
+                  name: feedback
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: candidate_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_create
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_update
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: candidate_id
+                  baseTableName: tb_candidate
+                  constraintName: fk_candidate_stage
+                  referencedColumnNames: candidate_id
+                  referencedTableName: tb_stage_table
