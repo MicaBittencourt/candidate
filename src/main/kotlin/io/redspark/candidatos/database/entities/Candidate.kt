@@ -39,9 +39,12 @@ data class Candidate(
         name = "skill_candidate",
         joinColumns = [JoinColumn(name = "candidate_id")],
         inverseJoinColumns = [JoinColumn(name = "skill_id")])
-    val skillList: List<Skill> = emptyList(),
+    val skillList: List<Skill> = mutableListOf(),
 
-    ){
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    val stagelList: List<Stage> = mutableListOf()
+
+){
 /*constructor(candidate: candidateDTO) : this(
     id = candidate.id,
     name = candidate.name,

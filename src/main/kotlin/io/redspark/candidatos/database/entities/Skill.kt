@@ -20,9 +20,9 @@ data class Skill(
     val name: String,
 
     @ManyToMany(mappedBy = "skillList")
-    val candidateList: List<Candidate> = emptyList()
+    val candidateList: List<Candidate> = mutableListOf()
 
-    ){
+){
 /*constructor(skill: skillDTO) : this(
     id = skill.id,
     name = skill.name
