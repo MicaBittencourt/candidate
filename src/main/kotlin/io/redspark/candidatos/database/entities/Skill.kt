@@ -22,6 +22,7 @@ data class Skill(
     @ManyToMany(mappedBy = "skillList")
     val candidateList: List<Candidate> = mutableListOf()
 
+
 ){
 /*constructor(skill: skillDTO) : this(
     id = skill.id,

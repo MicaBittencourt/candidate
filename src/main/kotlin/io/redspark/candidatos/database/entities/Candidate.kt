@@ -41,6 +41,7 @@ data class Candidate(
         inverseJoinColumns = [JoinColumn(name = "skill_id")])
     val skillList: List<Skill> = mutableListOf(),
 
+
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     val stagelList: List<Stage> = mutableListOf()
 
