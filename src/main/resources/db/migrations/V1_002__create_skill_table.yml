@@ -1,22 +1,31 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_001
+      id: V1_002
       author: Michele Bittencourt
       changes:
         - createTable:
-            tableName: TB_USER
+            tableName: skill
             columns:
               - column:
-                  name: user_id
+                  name: skill_id
                   type: uuid
                   constraints:
                     unique: true
                     primaryKey: true
                     nullable: false
               - column:
-                  name: email
+                  name: name
                   type: VARCHAR(200)
                   constraints:
                     unique: true
-                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: TIMESTAMP
+                  constraints:
                     nullable: false
