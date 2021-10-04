@@ -16,8 +16,6 @@ class UserServiceImpl(
             return UserDTO(email = "", admin = false)
         }
 
-
-
         if (email.contains(".admin")) {
             val userDTO: UserDTO = UserDTO(email = email, admin = true)
             return userDTO
@@ -29,11 +27,4 @@ class UserServiceImpl(
 
     }
 
-   /* override fun getUserByToken(token: String): UserDTO {
-        val userDTO: UserDTO? = repository.getUserByToken(token)
-        if (userDTO == null){
-            throw ResponseStatusException(HttpStatus.NOT_FOUND,"user.not.found")
-        }
-        return userDTO
-    }*/
 }

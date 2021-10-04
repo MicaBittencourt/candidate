@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 import javax.validation.Valid
+import javax.validation.constraints.Email
 
 @Validated
 @RestController
@@ -22,7 +23,7 @@ class UserController(
 ) {
 
         @GetMapping("me")
-        fun getUser(@RequestHeader(HttpHeaders.AUTHORIZATION) @Valid email: String): UserDTO?{
+        fun getUser(@RequestHeader(HttpHeaders.AUTHORIZATION) @Email @Valid email: String): UserDTO?{
 
 
                 val userDTO: UserDTO? = userService.getUser(email)
