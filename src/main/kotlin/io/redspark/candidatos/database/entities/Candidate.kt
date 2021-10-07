@@ -37,9 +37,6 @@ data class Candidate(
     @Column(name = "source")
     val source: String,
 
-//    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
-//    val stagelList: List<Stage> = mutableListOf(),
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "skill_candidate",
         joinColumns = [JoinColumn(name = "candidate_id", referencedColumnName = "candidate_id")],

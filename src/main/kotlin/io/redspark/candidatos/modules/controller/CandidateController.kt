@@ -34,12 +34,11 @@ class CandidateController(
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Cadastra candidato", consumes = "application/json")
     @ApiResponses(value = [
-        ApiResponse(code = 200, message = "Retorna candidato cadastrado", response = CandidateDTO::class),
+        ApiResponse(code = 201, message = "Retorna skill cadastrada", response = CandidateDTO::class),
         ApiResponse(code = 401, message = "unauthorized")
     ])
     fun createCandidate(@RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
 
-//    fun createCandidateStage(@RequestBody createCandidateStageDTO: CreateCandidateStageDTO): StageDTO = stageService.createUser(createCanditateStageDTO)
 
 
 

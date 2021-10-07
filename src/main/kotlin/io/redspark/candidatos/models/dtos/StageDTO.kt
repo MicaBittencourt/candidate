@@ -27,9 +27,6 @@ data class StageDTO(
     @JsonProperty("feedback")
     val feedback: String,
 
-//    @JsonProperty("id_candidate")
-//    val candidate: Candidate,
-
     @JsonProperty("user_create")
     val user_create: String,
 
@@ -40,25 +37,21 @@ data class StageDTO(
     ){
 
     constructor(stage: Stage): this(
-//        id = stage.id,
         appointment_date_hour = stage.appointment_date_hour,
         stage_type = stage.stage_type,
         conclusion = stage.conclusion,
         feedback = stage.feedback,
-//        candidate = stage.candidate,
         user_create = stage.user_create,
         user_update = stage.user_update,
         schedule_status = stage.schedule_status
     )
 
     constructor(createCandidateStageDTO: CreateCandidateStageDTO): this(
-//        id = createCandidateStageDTO.id,
         appointment_date_hour = createCandidateStageDTO.appointment_date_hour,
         stage_type = createCandidateStageDTO.stage_type,
         schedule_status = createCandidateStageDTO.schedule_status,
         conclusion = createCandidateStageDTO.conclusion,
         feedback = createCandidateStageDTO.feedback,
-//        candidate = createCandidateStageDTO.candidate,
         user_create = createCandidateStageDTO.user_create,
         user_update = createCandidateStageDTO.user_update
     )
