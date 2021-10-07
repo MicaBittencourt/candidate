@@ -4,4 +4,4 @@ import io.redspark.candidatos.database.entities.Stage
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-interface StageRepository : JpaRepository<Stage, UUID>
+interface StageRepository : JpaRepository<Stage, Long>

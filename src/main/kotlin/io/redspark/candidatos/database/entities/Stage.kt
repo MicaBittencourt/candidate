@@ -1,5 +1,9 @@
 package io.redspark.candidatos.database.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import io.redspark.candidatos.models.dtos.CreateCandidateDTO
+import io.redspark.candidatos.models.dtos.CreateCandidateStageDTO
+import io.redspark.candidatos.models.dtos.StageDTO
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -7,6 +11,7 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
+// TODO - alterar schedule_status para enum
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "stage")
@@ -14,10 +19,10 @@ data class Stage(
     @Id
     @GeneratedValue
     @Column(name = "stage_id")
-    val id: UUID? = null,
+    val id: Long? = null,
 
     @Column(name = "appointment_date_hour")
-    val appointment_date_hour: Date,
+    val appointment_date_hour: LocalDateTime,
 
     @Column(name = "stage_type")
     val stage_type: String,
@@ -26,13 +31,14 @@ data class Stage(
     val schedule_status: String,
 
     @Column(name = "conclusion")
-    val conclusion: String,
+    val conclusion: Boolean,
 
     @Column(name = "feedback")
     val feedback: String,
 
     @ManyToOne(targetEntity = Candidate::class, fetch = FetchType.LAZY)
     @JoinColumn(name = "candidate_id")
+    @JsonIgnoreProperties("stageList")
     val candidate: Candidate,
 
     @Column(name = "user_create")
@@ -42,18 +48,16 @@ data class Stage(
     val user_update: String
 
 ) {
-/*constructor(stage: stageDTO) : this(
-    id = stage.id,
-    appointment_date_hour = stage.appointment_date_hour,
-    stage_type = stage.stage_type,
-    schedule_status = stage.schedule_status,
-    conclusion = stage.conclusion,
-    feedback = stage.feedback,
-    candidate_id = stage.candidate_id,
-    user_create = stage.user_create,
-    user_update = stage.user_update
-
-    )*/
+    constructor(stageDTO: StageDTO, candidate: Candidate): this(
+        appointment_date_hour = stageDTO.appointment_date_hour,
+        stage_type = stageDTO.stage_type,
+        schedule_status = stageDTO.schedule_status,
+        conclusion = stageDTO.conclusion,
+        feedback = stageDTO.feedback,
+        candidate = candidate,
+        user_create = stageDTO.user_create,
+        user_update = stageDTO.user_update
+    )
 
     @CreatedDate
     @Column(name = "created_date")

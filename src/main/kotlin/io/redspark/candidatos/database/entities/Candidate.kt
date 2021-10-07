@@ -1,5 +1,7 @@
 package io.redspark.candidatos.database.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import io.redspark.candidatos.models.dtos.CandidateDTO
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -7,6 +9,7 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
+//TODO - alterar mutablelist para emptyList
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "candidate")
@@ -34,28 +37,31 @@ data class Candidate(
     @Column(name = "source")
     val source: String,
 
-    @ManyToMany
-    @JoinTable(
-        name = "skill_candidate",
-        joinColumns = [JoinColumn(name = "candidate_id")],
-        inverseJoinColumns = [JoinColumn(name = "skill_id")])
-    val skillList: List<Skill> = mutableListOf(),
+//    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+//    val stagelList: List<Stage> = mutableListOf(),
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "skill_candidate",
+        joinColumns = [JoinColumn(name = "candidate_id", referencedColumnName = "candidate_id")],
+        inverseJoinColumns = [JoinColumn(name = "skill_id", referencedColumnName = "skill_id")])
+    @JsonIgnoreProperties("candidate")
+    var skillList: List<Skill> = mutableListOf(),
 
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
-    val stagelList: List<Stage> = mutableListOf()
+    var stagelList: List<Stage> = mutableListOf()
+
+
 
 ){
-/*constructor(candidate: candidateDTO) : this(
-    id = candidate.id,
-    name = candidate.name,
-    email = candidate.email,
-    linkedin = candidate.linkedin,
-    cv = candidate.cv,
-    phone = candidate.phone,
-    source = candidate.source
-
-    )*/
+    constructor(candidateDTO: CandidateDTO): this(
+        id = candidateDTO.id,
+        name = candidateDTO.name,
+        email = candidateDTO.email,
+        linkedin = candidateDTO.linkedin,
+        curriculum = candidateDTO.curriculum,
+        phone = candidateDTO.phone,
+        source= candidateDTO.source
+    )
 
     @CreatedDate
     @Column(name = "created_date")
