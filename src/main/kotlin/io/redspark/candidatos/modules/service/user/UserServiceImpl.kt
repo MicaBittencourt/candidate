@@ -1,12 +1,9 @@
-package io.redspark.candidatos.service
+package io.redspark.candidatos.modules.service.user
 
 import io.redspark.candidatos.models.dtos.UserListDTO.UserDTO
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.server.ResponseStatusException
-import java.util.*
-import javax.validation.constraints.Email
 
 
 @Service

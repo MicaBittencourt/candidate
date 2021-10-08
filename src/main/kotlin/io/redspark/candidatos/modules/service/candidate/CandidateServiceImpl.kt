@@ -1,4 +1,4 @@
-package io.redspark.candidatos.modules.service
+package io.redspark.candidatos.modules.service.candidate
 
 import io.redspark.candidatos.database.entities.Candidate
 import io.redspark.candidatos.database.entities.Skill
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 //TODO - alterar chamada countByName para existsById
+//TODO - salvar dados na tabela stage pegando id do candidato
 @Service
 class CandidateServiceImpl(
     private val candidatesRepository: CandidateRepository,
@@ -82,6 +83,8 @@ class CandidateServiceImpl(
             val stage = Stage(stageDTO, candidate)
             stage.createdDate = LocalDateTime.now()
             stageList.add(stage)
+
+
         }
         return stageList
 
