@@ -1,7 +1,6 @@
-package io.redspark.candidatos.service
+package io.redspark.candidatos.modules.service.user
 
 import io.redspark.candidatos.models.dtos.UserListDTO.UserDTO
-import java.util.*
 
 interface UserService {
     fun getUser(email: String): UserDTO

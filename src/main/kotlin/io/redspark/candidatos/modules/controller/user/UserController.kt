@@ -1,7 +1,7 @@
-package io.redspark.candidatos.controller
+package io.redspark.candidatos.modules.controller.user
 
 import io.redspark.candidatos.models.dtos.UserListDTO.UserDTO
-import io.redspark.candidatos.service.UserService
+import io.redspark.candidatos.modules.service.user.UserService
 import org.springframework.http.HttpHeaders
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,18 +1,20 @@
-package io.redspark.candidatos.modules.controller
+package io.redspark.candidatos.modules.controller.candidate
 
 import io.redspark.candidatos.models.dtos.CandidateDTO
 import io.redspark.candidatos.models.dtos.CreateCandidateDTO
-import io.redspark.candidatos.models.dtos.CreateCandidateStageDTO
-import io.redspark.candidatos.models.dtos.StageDTO
-import io.redspark.candidatos.modules.service.CandidateService
+import io.redspark.candidatos.modules.service.candidate.CandidateService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
+import javax.validation.constraints.Email
 
+@Validated
 @RestController
 @RequestMapping("/candidates")
 @Api(value = "Candidate", description = "Controle para cadastro de candidatos")
@@ -28,7 +30,7 @@ class CandidateController(
         ApiResponse(code = 200, message = "Retorna todos candidatos cadastrados", response = CandidateDTO::class),
         ApiResponse(code = 401, message = "unauthorized")
     ])
-    fun getCandidateList(): List<CandidateDTO> = candidateService.getCandidateList()
+    fun getCandidateList(@RequestHeader(HttpHeaders.AUTHORIZATION) @Email @Valid email: String): List<CandidateDTO> = candidateService.getCandidateList()
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -37,7 +39,8 @@ class CandidateController(
         ApiResponse(code = 201, message = "Retorna skill cadastrada", response = CandidateDTO::class),
         ApiResponse(code = 401, message = "unauthorized")
     ])
-    fun createCandidate(@RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
+    fun createCandidate(@RequestHeader(HttpHeaders.AUTHORIZATION) @Email @Valid email: String,
+        @RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
 
 
 

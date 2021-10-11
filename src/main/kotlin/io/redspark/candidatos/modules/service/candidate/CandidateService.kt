@@ -1,4 +1,4 @@
-package io.redspark.candidatos.modules.service
+package io.redspark.candidatos.modules.service.candidate
 
 import io.redspark.candidatos.models.dtos.CandidateDTO
 import io.redspark.candidatos.models.dtos.CreateCandidateDTO
