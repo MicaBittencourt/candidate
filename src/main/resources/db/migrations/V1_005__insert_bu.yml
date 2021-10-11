@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_005
+      author: Marcus Costa
+      preConditions:
+        tableExists:
+          tableName: business_unit
+      changes:
+        - sql:
+            sql: INSERT INTO business_unit (bu_id, name, created_date, updated_date) VALUES (1, 'Redspark', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO business_unit (bu_id, name, created_date, updated_date) VALUES (2, 'Holmes', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO business_unit (bu_id, name, created_date, updated_date) VALUES (3, 'Gestta', current_timestamp, current_timestamp);

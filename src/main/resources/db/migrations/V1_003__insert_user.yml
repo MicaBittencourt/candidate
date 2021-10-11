@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_003
+      author: Marcus Costa
+      preConditions:
+        tableExists:
+          tableName: proj_user
+      changes:
+        - sql:
+            sql: INSERT INTO proj_user (user_id, name, email, created_date, updated_date) VALUES ('2b2e57bb-aab1-427e-a3aa-6b1d4df33132', 'Marcus Costa', 'marcus.costa@redspark.io', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('2b2e57bb-aab1-427e-a3aa-6b1d4df33132', 'ROLE_ADMIN');
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('2b2e57bb-aab1-427e-a3aa-6b1d4df33132', 'ROLE_INTERVIEWER');
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('2b2e57bb-aab1-427e-a3aa-6b1d4df33132', 'ROLE_USER');
+        - sql:
+            sql: INSERT INTO proj_user (user_id, name, email, created_date, updated_date) VALUES ('4e8883a4-8c17-4f5d-a387-4b6be28ba76b', 'Isabella Sales', 'isabella.sales@redspark.io', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('4e8883a4-8c17-4f5d-a387-4b6be28ba76b', 'ROLE_ADMIN');
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('4e8883a4-8c17-4f5d-a387-4b6be28ba76b', 'ROLE_PEOPLE');
+        - sql:
+            sql: INSERT INTO user_permission (user_id, permission) VALUES ('4e8883a4-8c17-4f5d-a387-4b6be28ba76b', 'ROLE_USER');
