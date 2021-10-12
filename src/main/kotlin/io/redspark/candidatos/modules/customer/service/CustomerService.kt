@@ -1,4 +1,4 @@
-package io.redspark.candidatos.modules.Customer.Service
+package io.redspark.candidatos.modules.customer.service
 
 import io.redspark.candidatos.models.dtos.CustomerDTO
 import org.springframework.data.domain.Page

@@ -1,4 +1,4 @@
-package io.redspark.candidatos.modules.BusinessUnit.Service
+package io.redspark.candidatos.modules.businessunit.service
 
 import io.redspark.candidatos.database.repositories.BusinessUnitRepository
 import io.redspark.candidatos.models.dtos.BusinessUnitDTO

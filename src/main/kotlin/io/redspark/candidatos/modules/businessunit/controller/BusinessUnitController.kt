@@ -1,7 +1,7 @@
-package io.redspark.candidatos.modules.BusinessUnit.Controller
+package io.redspark.candidatos.modules.businessunit.controller
 
 import io.redspark.candidatos.models.dtos.BusinessUnitDTO
-import io.redspark.candidatos.modules.BusinessUnit.Service.BusinessUnitService
+import io.redspark.candidatos.modules.businessunit.service.BusinessUnitService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse

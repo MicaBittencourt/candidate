@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_008
+      author: Marcus Costa
+      preConditions:
+        tableExists:
+          tableName: job_title
+      changes:
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (1, 'Backend', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (2, 'Frontend', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (3, 'Fullstack', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (4, 'QA', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (5, 'DevOps', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (6, 'DevSecOps', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (7, 'Infra', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (8, 'Scrum Master', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (9, 'Product Manager', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (10, 'Arquiteto Software', current_timestamp, current_timestamp);
+        - sql:
+            sql: INSERT INTO job_title (job_title_id, name, created_date, updated_date) VALUES (11, 'Arquiteto Solução', current_timestamp, current_timestamp);

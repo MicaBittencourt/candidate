@@ -1,10 +1,8 @@
-package io.redspark.candidatos.modules.Customer.Controller
+package io.redspark.candidatos.modules.customer.controller
 
-import io.redspark.candidatos.models.dtos.BusinessUnitDTO
 import io.redspark.candidatos.models.dtos.CustomerDTO
 import io.redspark.candidatos.models.enums.Permissions
-import io.redspark.candidatos.modules.BusinessUnit.Service.BusinessUnitService
-import io.redspark.candidatos.modules.Customer.Service.CustomerService
+import io.redspark.candidatos.modules.customer.service.CustomerService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse

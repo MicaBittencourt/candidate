@@ -1,5 +1,8 @@
-package io.redspark.candidatos.modules.Customer.Service
+package io.redspark.candidatos.modules.customer.service
 
+import io.redspark.candidatos.config.logger.LoggerDelegate
+import io.redspark.candidatos.config.logger.logCreated
+import io.redspark.candidatos.config.logger.logUpdated
 import io.redspark.candidatos.database.entities.Customer
 import io.redspark.candidatos.database.repositories.CustomerRepository
 import io.redspark.candidatos.models.dtos.CustomerDTO
@@ -15,6 +18,8 @@ class CustomerServiceImpl(
     private val customerRepository: CustomerRepository
 ) : CustomerService {
 
+    private val logger by LoggerDelegate()
+
     override fun getCustomerList(): List<CustomerDTO> = customerRepository.findAll()
         .map { CustomerDTO(it) }
 
@@ -22,7 +27,7 @@ class CustomerServiceImpl(
         val page = if (term == null) {
             customerRepository.findAll(pageable)
         } else {
-            customerRepository.findAllByNameContaining(term, pageable)
+            customerRepository.findAllByNameContainingIgnoreCase(term, pageable)
         }
 
         return page.map { CustomerDTO(it) }
@@ -41,6 +46,8 @@ class CustomerServiceImpl(
         var customer = Customer(customerDTO)
         customer = customerRepository.save(customer)
 
+        logger.logCreated(customer)
+
         return CustomerDTO(customer)
     }
 
@@ -51,6 +58,8 @@ class CustomerServiceImpl(
 
         var customer = Customer(customerDTO)
         customer = customerRepository.save(customer)
+
+        logger.logUpdated(customer)
 
         return CustomerDTO(customer)
     }

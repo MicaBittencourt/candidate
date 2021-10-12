@@ -27,7 +27,7 @@ class User(
     var permissionList: List<UserPermission> = emptyList()
 
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false)
     lateinit var createdDate: LocalDateTime
 
     @LastModifiedDate

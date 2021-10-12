@@ -20,11 +20,14 @@ class BusinessUnit(
 ) {
 
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false)
     lateinit var createdDate: LocalDateTime
 
     @LastModifiedDate
     @Column(name = "updated_date")
     lateinit var updatedDate: LocalDateTime
+
+    @OneToMany(mappedBy = "businessUnit", fetch = FetchType.LAZY)
+    var jobList: List<Job> = emptyList()
 
 }

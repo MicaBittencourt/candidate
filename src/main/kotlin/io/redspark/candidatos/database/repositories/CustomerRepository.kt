@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CustomerRepository : JpaRepository<Customer, Long> {
 
-    fun findAllByNameContaining(term: String, pageable: Pageable): Page<Customer>
+    fun findAllByNameContainingIgnoreCase(term: String, pageable: Pageable): Page<Customer>
 
 }
