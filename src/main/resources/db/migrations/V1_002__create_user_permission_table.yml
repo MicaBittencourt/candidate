@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_002
+      author: Marcus Costa
+      changes:
+        - createTable:
+            tableName: user_permission
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: permission
+                  type: VARCHAR(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_permission
+            constraintName: fk_user_permisson_user
+            referencedColumnNames: user_id
+            referencedTableName: proj_user
