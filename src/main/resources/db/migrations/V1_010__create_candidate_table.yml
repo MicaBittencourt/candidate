@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_001
+      author: Michele Bittencourt
+      changes:
+        - createTable:
+            tableName: candidate
+            columns:
+              - column:
+                  name: candidate_id
+                  type: uuid
+                  constraints:
+                    unique: true
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(200)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: linkedin
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: curriculum
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: phone
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true

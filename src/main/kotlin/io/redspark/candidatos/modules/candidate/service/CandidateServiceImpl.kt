@@ -1,4 +1,4 @@
-package io.redspark.candidatos.modules.service.candidate
+package io.redspark.candidatos.modules.candidate.service
 
 import io.redspark.candidatos.database.entities.Candidate
 import io.redspark.candidatos.database.entities.Skill

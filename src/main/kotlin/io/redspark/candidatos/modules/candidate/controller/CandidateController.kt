@@ -1,8 +1,8 @@
-package io.redspark.candidatos.modules.controller.candidate
+package io.redspark.candidatos.modules.candidate.controller
 
 import io.redspark.candidatos.models.dtos.CandidateDTO
 import io.redspark.candidatos.models.dtos.CreateCandidateDTO
-import io.redspark.candidatos.modules.service.candidate.CandidateService
+import io.redspark.candidatos.modules.candidate.service.CandidateService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse

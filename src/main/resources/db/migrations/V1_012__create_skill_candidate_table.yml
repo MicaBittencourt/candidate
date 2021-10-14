@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_003
+      author: Michele Bittencourt
+      changes:
+        - createTable:
+            tableName: skill_candidate
+            columns:
+              - column:
+                  name: candidate_id
+                  type: BIGSERIAL
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: skill_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseColumnNames: candidate_id
+                  baseTableName: skill_candidate
+                  constraintName: fk_skill_candidate_candidate
+                  referencedColumnNames: candidate_id
+                  referencedTableName: candidate
+              - addForeignKeyConstraint:
+                  baseColumnNames: skill_id
+                  baseTableName: skill_candidate
+                  constraintName: fk_skill_candidate_skill
+                  referencedColumnNames: skill_id
+                  referencedTableName: skill
