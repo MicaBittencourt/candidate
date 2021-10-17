@@ -3,8 +3,7 @@ package io.redspark.candidatos.models.dtos
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 
-data class CreateCandidateDTO (
-
+data class UpdateCandidateDTO (
     @JsonProperty("id")
     val id: UUID? = null,
 
@@ -29,7 +28,5 @@ data class CreateCandidateDTO (
     @JsonProperty("skillList")
     var skillList: List<Long>,
 
-//    @JsonProperty("stageList")
-//    var stageList: List<StageDTO>
 
 )

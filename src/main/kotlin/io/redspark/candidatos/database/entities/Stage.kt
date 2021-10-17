@@ -1,7 +1,6 @@
 package io.redspark.candidatos.database.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.redspark.candidatos.models.dtos.StageDTO
 import io.redspark.candidatos.models.enums.StageScheduleStatus
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 import javax.persistence.*
 
-// TODO - alterar schedule_status para enum
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "stage")
@@ -46,18 +44,7 @@ data class Stage(
     @Column(name = "user_update")
     val user_update: String
 
-) {
-    constructor(stageDTO: StageDTO, candidate: Candidate): this(
-        appointment_date_hour = stageDTO.appointment_date_hour,
-        stage_type = stageDTO.stage_type,
-        schedule_status = StageScheduleStatus.AGUARDANDO_ENTREVISTA,
-        conclusion = stageDTO.conclusion,
-        feedback = stageDTO.feedback,
-        candidate = candidate,
-        user_create = stageDTO.user_create,
-        user_update = stageDTO.user_update
-    )
-
+){
     @CreatedDate
     @Column(name = "created_date")
     lateinit var createdDate: LocalDateTime

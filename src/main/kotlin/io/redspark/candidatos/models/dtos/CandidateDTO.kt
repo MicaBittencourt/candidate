@@ -30,11 +30,11 @@ data class CandidateDTO (
     @JsonProperty("skillList")
     var skillList: List<SkillDTO>,
 
-    @JsonProperty("stageList")
-    var stageList: List<StageDTO>
+//    @JsonProperty("stageList")
+//    var stageList: List<StageDTO>
 
 ){
-    constructor(candidate: Candidate, skillList: List<SkillDTO>, stageList: List<StageDTO> ): this(
+    constructor(candidate: Candidate, skillList: List<SkillDTO>): this(
         id = candidate.id,
         name = candidate.name,
         email = candidate.email,
@@ -43,7 +43,6 @@ data class CandidateDTO (
         linkedin = candidate.linkedin,
         curriculum = candidate.curriculum,
         skillList = skillList,
-        stageList = stageList
     )
 
     constructor(createCandidateDTO: CreateCandidateDTO): this(
@@ -55,7 +54,6 @@ data class CandidateDTO (
         linkedin = createCandidateDTO.linkedin,
         curriculum = createCandidateDTO.curriculum,
         skillList = listOf<SkillDTO>(),
-        stageList = listOf<StageDTO>()
     )
 
 }

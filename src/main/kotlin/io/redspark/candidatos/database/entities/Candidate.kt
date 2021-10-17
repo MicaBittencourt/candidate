@@ -9,7 +9,6 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
-//TODO - alterar mutablelist para emptyList
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "candidate")
@@ -20,22 +19,22 @@ data class Candidate(
     val id: UUID? = null,
 
     @Column(name = "name")
-    val name: String,
+    var name: String,
 
     @Column(name = "email")
-    val email: String,
+    var email: String,
 
     @Column(name = "linkedin")
-    val linkedin: String,
+    var linkedin: String,
 
     @Column(name = "curriculum")
-    val curriculum: String,
+    var curriculum: String,
 
     @Column(name = "phone")
-    val phone: String,
+    var phone: String,
 
     @Column(name = "source")
-    val source: String,
+    var source: String,
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "skill_candidate",
@@ -50,6 +49,15 @@ data class Candidate(
 
 
 ){
+
+    @CreatedDate
+    @Column(name = "created_date")
+    lateinit var createdDate: LocalDateTime
+
+    @LastModifiedDate
+    @Column(name = "updated_date")
+    lateinit var updatedDate: LocalDateTime
+
     constructor(candidateDTO: CandidateDTO): this(
         id = candidateDTO.id,
         name = candidateDTO.name,
@@ -59,14 +67,6 @@ data class Candidate(
         phone = candidateDTO.phone,
         source= candidateDTO.source
     )
-
-    @CreatedDate
-    @Column(name = "created_date")
-    lateinit var createdDate: LocalDateTime
-
-    @LastModifiedDate
-    @Column(name = "updated_date")
-    lateinit var updatedDate: LocalDateTime
 
 }
 

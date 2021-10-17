@@ -8,13 +8,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: candidate_id
-                  type: BIGSERIAL
-                  autoIncrement: true
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
                   name: skill_id
-                  type: uuid
+                  type: BIGSERIAL
+                  autoIncrement: true
                   constraints:
                     nullable: false
               - addForeignKeyConstraint:
