@@ -42,6 +42,7 @@ class CandidateController(
     @ApiOperation(value = "Cadastra candidato", consumes = "application/json")
     @ApiResponses(value = [
         ApiResponse(code = 201, message = "Retorna skill cadastrada", response = CreateCandidateDTO::class),
+        ApiResponse(code = 400, message = "content.length.field.required"),
         ApiResponse(code = 401, message = "unauthorized")
     ])
     fun createCandidate(@RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
@@ -52,9 +53,11 @@ class CandidateController(
     @ApiOperation(value = "Altera candidato existente", consumes = "application/json")
     @ApiResponses(value = [
         ApiResponse(code = 200, message = "Retorna candidato",response = UpdateCandidateDTO::class),
-        ApiResponse(code = 401, message = "unauthorized")
+        ApiResponse(code = 400, message = "content.length.field.required"),
+        ApiResponse(code = 401, message = "unauthorized"),
+        ApiResponse(code = 404, message = "candidate.not.found")
     ])
-    fun updateUser(@PathVariable @Valid id: UUID, @RequestBody UpdateCandidateDTO: UpdateCandidateDTO) = candidateService.updateCandidate(id, UpdateCandidateDTO)
+    fun updateCandidate(@PathVariable @Valid id: UUID, @RequestBody @Valid UpdateCandidateDTO: UpdateCandidateDTO) = candidateService.updateCandidate(id, UpdateCandidateDTO)
 
 
 

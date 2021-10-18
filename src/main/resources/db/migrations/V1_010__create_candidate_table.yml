@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_001
+      id: V1_010
       author: Michele Bittencourt
       changes:
         - createTable:
@@ -17,12 +17,12 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(200)
                   constraints:
-                    unique: true
                     nullable: false
               - column:
                   name: email
                   type: VARCHAR(100)
                   constraints:
+                    unique: true
                     nullable: false
               - column:
                   name: linkedin

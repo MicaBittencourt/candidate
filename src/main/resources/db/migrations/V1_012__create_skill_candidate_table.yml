@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_003
+      id: V1_012
       author: Michele Bittencourt
       changes:
         - createTable:

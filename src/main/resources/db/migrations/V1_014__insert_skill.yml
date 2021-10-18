@@ -7,9 +7,9 @@ databaseChangeLog:
           tableName: skill
       changes:
         - sql:
-            sql: INSERT INTO skill (skill_id, name, created_date, updated_date) VALUES (1, 'kotlin', current_timestamp, current_timestamp);
+            sql: INSERT INTO skill (skill_id, name, created_date, updated_date) VALUES (1, 'Kotlin', current_timestamp, current_timestamp);
         - sql:
-            sql: INSERT INTO skill (skill_id, name, created_date, updated_date) VALUES (2, 'java', current_timestamp, current_timestamp);
+            sql: INSERT INTO skill (skill_id, name, created_date, updated_date) VALUES (2, 'Java', current_timestamp, current_timestamp);
         - sql:
             sql: INSERT INTO skill (skill_id, name, created_date, updated_date) VALUES (3, 'Node', current_timestamp, current_timestamp);
         - sql:

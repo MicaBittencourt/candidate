@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_004
-      author: Ligiane Domingos
+      id: V1_013
+      author: Michele Bittencourt
       changes:
         - createTable:
             tableName: stage

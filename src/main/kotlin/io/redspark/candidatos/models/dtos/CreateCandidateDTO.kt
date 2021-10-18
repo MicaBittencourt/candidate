@@ -29,7 +29,4 @@ data class CreateCandidateDTO (
     @JsonProperty("skillList")
     var skillList: List<Long>,
 
-//    @JsonProperty("stageList")
-//    var stageList: List<StageDTO>
-
 )

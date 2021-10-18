@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_002
+      id: V1_011
       author: Ligiane Domingos
       changes:
         - createTable:

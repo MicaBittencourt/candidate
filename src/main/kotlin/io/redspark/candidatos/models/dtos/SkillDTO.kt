@@ -17,10 +17,7 @@ data class SkillDTO (
         id = skill.id,
         name = skill.name
     )
-    constructor(createSkillDTO: CreateSkillDTO) : this(
-        id = createSkillDTO.id,
-        name = createSkillDTO.name,
-    )
+    
 
 
 }

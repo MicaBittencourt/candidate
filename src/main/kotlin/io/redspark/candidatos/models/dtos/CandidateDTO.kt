@@ -30,9 +30,6 @@ data class CandidateDTO (
     @JsonProperty("skillList")
     var skillList: List<SkillDTO>,
 
-//    @JsonProperty("stageList")
-//    var stageList: List<StageDTO>
-
 ){
     constructor(candidate: Candidate, skillList: List<SkillDTO>): this(
         id = candidate.id,
