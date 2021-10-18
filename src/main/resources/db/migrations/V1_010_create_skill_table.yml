@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_010
+      author: Paloma Toledo
+      changes:
+        - createTable:
+            tableName: skill
+            columns:
+              - column:
+                  name: skill_id
+                  type: BIGSERIAL
+                  autoIncrement: true
+                  constraints:
+                    unique: true
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(200)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
