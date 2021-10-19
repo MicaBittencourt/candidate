@@ -10,16 +10,18 @@ import javax.persistence.*
 @Entity
 @EntityListeners(AuditingEntityListener::class)
 @Table(name = "skill")
-data class Skill (
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "skill_id")
-        val id: Long? = null,
+data class Skill(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "skill_id")
+    val id: Long? = null,
 
-        @Column(name = "name")
-        var name: String
+    @Column(name = "name")
+    val name: String
+){
 
-        ){
+    @ManyToMany(mappedBy = "skillList", fetch = FetchType.LAZY)
+    var candidateList: List<Candidate> = emptyList()
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)
@@ -29,9 +31,11 @@ data class Skill (
     @Column(name = "updated_date")
     lateinit var updatedDate: LocalDateTime
 
-    constructor(skillDTO: SkillDTO): this(
-            id = skillDTO.id,
-            name = skillDTO.name
+    constructor(skillDTO: SkillDTO) : this(
+        id = skillDTO.id,
+        name = skillDTO.name,
     )
+
+
 
 }

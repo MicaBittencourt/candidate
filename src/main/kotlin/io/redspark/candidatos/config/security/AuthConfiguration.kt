@@ -48,6 +48,7 @@ class AuthConfiguration(
             // Endpoints abertos
             .antMatchers("/admin/system/state/*").permitAll()
             .antMatchers("/actuator/**").permitAll()
+            .antMatchers("/candidates/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
