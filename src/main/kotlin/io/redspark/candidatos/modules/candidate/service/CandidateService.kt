@@ -5,10 +5,11 @@ import io.redspark.candidatos.models.dtos.CreateCandidateDTO
 import io.redspark.candidatos.models.dtos.UpdateCandidateDTO
 import java.util.*
 
-abstract class CandidateService {
-    abstract fun getCandidateList(): List<CandidateDTO>
-    abstract fun createCandidate(createCandidateDTO: CreateCandidateDTO): CandidateDTO
-    abstract fun updateCandidate(id: UUID, UpdateCandidateDTO: UpdateCandidateDTO)
+interface CandidateService {
+    fun getCandidateList(): List<CandidateDTO>
+    fun createCandidate(createCandidateDTO: CreateCandidateDTO): CandidateDTO
+    fun updateCandidate(id: UUID, UpdateCandidateDTO: UpdateCandidateDTO)
+    fun getCandidate(id: UUID): CandidateDTO
 
 
 }

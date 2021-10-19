@@ -17,22 +17,31 @@ data class UpdateCandidateDTO (
 
     @JsonProperty("email")
     @field: Email
-    @field:NotEmpty
     var email: String,
 
     @JsonProperty("linkedin")
+    @field:NotEmpty
+    @field:NotNull
     var linkedin: String,
 
     @JsonProperty("curriculum")
+    @field:NotEmpty
+    @field:NotNull
     var curriculum: String,
 
     @JsonProperty("phone")
+    @field:NotEmpty
+    @field:NotNull
     var phone: String,
 
     @JsonProperty("source")
+    @field:NotEmpty
+    @field:NotNull
     var source: String,
 
     @JsonProperty("skillList")
+    @field:NotEmpty
+    @field:NotNull
     var skillList: List<Long>,
 
 )

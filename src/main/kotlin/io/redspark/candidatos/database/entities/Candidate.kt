@@ -2,6 +2,8 @@ package io.redspark.candidatos.database.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.redspark.candidatos.models.dtos.CandidateDTO
+import io.redspark.candidatos.models.dtos.CreateCandidateDTO
+import io.redspark.candidatos.models.dtos.SkillDTO
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -46,8 +48,6 @@ data class Candidate(
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     var stagelList: List<Stage> = emptyList()
 
-
-
 ){
 
     @CreatedDate
@@ -67,6 +67,8 @@ data class Candidate(
         phone = candidateDTO.phone,
         source= candidateDTO.source
     )
+
+
 
 }
 

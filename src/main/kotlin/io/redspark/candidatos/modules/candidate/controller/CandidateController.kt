@@ -1,8 +1,6 @@
 package io.redspark.candidatos.modules.candidate.controller
 
-import io.redspark.candidatos.models.dtos.CandidateDTO
-import io.redspark.candidatos.models.dtos.CreateCandidateDTO
-import io.redspark.candidatos.models.dtos.UpdateCandidateDTO
+import io.redspark.candidatos.models.dtos.*
 import io.redspark.candidatos.models.enums.Permissions
 import io.redspark.candidatos.modules.candidate.service.CandidateService
 import io.swagger.annotations.Api
@@ -53,11 +51,20 @@ class CandidateController(
     @ApiOperation(value = "Altera candidato existente", consumes = "application/json")
     @ApiResponses(value = [
         ApiResponse(code = 200, message = "Retorna candidato",response = UpdateCandidateDTO::class),
-        ApiResponse(code = 400, message = "content.length.field.required"),
         ApiResponse(code = 401, message = "unauthorized"),
         ApiResponse(code = 404, message = "candidate.not.found")
     ])
     fun updateCandidate(@PathVariable @Valid id: UUID, @RequestBody @Valid UpdateCandidateDTO: UpdateCandidateDTO) = candidateService.updateCandidate(id, UpdateCandidateDTO)
+
+    @GetMapping("{id}", produces = ["application/json"])
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Busca candidatos por id", consumes = "application/json")
+    @ApiResponses(value = [
+        ApiResponse(code = 200, message = "Retorna a área de ocupação", response = CandidateDTO::class),
+        ApiResponse(code = 401, message = "unauthorized"),
+        ApiResponse(code = 404, message = "candidate.not.found")
+    ])
+    fun getCandidate(@PathVariable id: UUID): CandidateDTO = candidateService.getCandidate(id)
 
 
 

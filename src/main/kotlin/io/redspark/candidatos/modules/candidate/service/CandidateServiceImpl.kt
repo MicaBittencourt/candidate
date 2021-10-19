@@ -9,11 +9,11 @@ import io.redspark.candidatos.database.repositories.SkillRepository
 import io.redspark.candidatos.models.dtos.*
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
 
-//TODO - tratar validação de erros para campos
 //TODO - verificar regras para cadastro de skill caso tenha responsabilidade no cadastro do candidato, com existsById
 //TODO - verificar como será vinculado os dados do candidato nas etapas do processo seletivo
 @Service
@@ -21,7 +21,7 @@ class CandidateServiceImpl(
     private val candidatesRepository: CandidateRepository,
     private val skillsRepository: SkillRepository
 
-) : CandidateService() {
+) : CandidateService {
     private val logger by LoggerDelegate()
 
     override fun getCandidateList(): List<CandidateDTO> {
@@ -38,6 +38,10 @@ class CandidateServiceImpl(
     }
 
     override fun createCandidate(createCandidateDTO: CreateCandidateDTO): CandidateDTO {
+        if (createCandidateDTO.id != null) {
+            throw ServiceException(ServiceError.CANDIDATE_ID_NOT_EMPTY)
+        }
+
         val candidateDTO = CandidateDTO(createCandidateDTO)
         val candidate = Candidate(candidateDTO)
         candidate.skillList=skillsRepository.findAllById(createCandidateDTO.skillList)
@@ -46,6 +50,9 @@ class CandidateServiceImpl(
     }
 
     override fun updateCandidate(id: UUID, updateCandidateDTO: UpdateCandidateDTO) {
+        if (updateCandidateDTO.id == null || candidatesRepository.existsById(updateCandidateDTO.id).not()) {
+            throw ServiceException(ServiceError.CANDIDATE_NOT_FOUND)
+        }
 
         candidatesRepository.findById(id)
             .map { candidate ->
@@ -58,13 +65,13 @@ class CandidateServiceImpl(
                 candidate.skillList = skillsRepository.findAllById(updateCandidateDTO.skillList)
 
                 logger.logCreated(candidate)
-
                 candidatesRepository.save(candidate)
             }
+    }
 
+    override fun getCandidate(id: UUID): CandidateDTO {
+        val candidate = candidatesRepository.findByIdOrNull(id)?:
+        throw ServiceException(ServiceError.CANDIDATE_NOT_FOUND)
+        return CandidateDTO(candidate, skillEntityToSkillDTO(candidate.skillList))
     }
 }
-
-
-
-
