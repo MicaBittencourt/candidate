@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: V1_011
-      author: Ligiane Domingos
+      author: Michele Bittencourt
       changes:
         - createTable:
             tableName: candidate
