@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
 
+// TODO - tratar execeçoes de campos nulos id no update
 //TODO - verificar regras para cadastro de skill caso tenha responsabilidade no cadastro do candidato, com existsById
 //TODO - verificar como será vinculado os dados do candidato nas etapas do processo seletivo
 @Service
@@ -50,9 +51,6 @@ class CandidateServiceImpl(
     }
 
     override fun updateCandidate(id: UUID, updateCandidateDTO: UpdateCandidateDTO) {
-        if (updateCandidateDTO.id == null || candidatesRepository.existsById(updateCandidateDTO.id).not()) {
-            throw ServiceException(ServiceError.CANDIDATE_NOT_FOUND)
-        }
 
         candidatesRepository.findById(id)
             .map { candidate ->
