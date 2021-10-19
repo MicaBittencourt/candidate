@@ -17,7 +17,7 @@ data class SkillDTO (
         id = skill.id,
         name = skill.name
     )
-    
+
 
 
 }

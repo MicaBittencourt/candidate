@@ -10,5 +10,7 @@ enum class ServiceError(val status: HttpStatus, val message: String) {
     JOB_TITLE_NOT_FOUND(HttpStatus.NOT_FOUND, "job.title.not.found"),
     JOB_TITLE_ID_NOT_EMPTY(HttpStatus.BAD_REQUEST, "job.title.id.not.empty"),
     CANDIDATE_ID_NOT_EMPTY(HttpStatus.NOT_FOUND, "candidate.field.not.empty"),
-    CANDIDATE_NOT_FOUND(HttpStatus.NOT_FOUND, "candidate.not.found");
+    CANDIDATE_NOT_FOUND(HttpStatus.NOT_FOUND, "candidate.not.found"),
+    SKILL_ID_NOT_EMPTY(HttpStatus.BAD_REQUEST, "skill.id.not.empty");
+
 }
