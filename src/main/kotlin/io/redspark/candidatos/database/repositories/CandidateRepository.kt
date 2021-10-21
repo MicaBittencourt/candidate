@@ -9,5 +9,8 @@ import org.springframework.data.repository.CrudRepository
 import java.util.*
 
 interface CandidateRepository : CrudRepository<Candidate, UUID> {
+    fun findAllByNameContainingIgnoreCase(term: String, pageable: Pageable): Page<Candidate>
+    fun findAll(pageable: Pageable): Page<Candidate>
+
 
 }
