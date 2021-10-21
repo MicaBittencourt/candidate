@@ -48,7 +48,7 @@ databaseChangeLog:
                   name: created_date
                   type: TIMESTAMP
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: updated_date
                   type: TIMESTAMP

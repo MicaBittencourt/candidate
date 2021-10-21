@@ -2,7 +2,9 @@ package io.redspark.candidatos.modules.candidate.service
 
 import io.redspark.candidatos.config.logger.LoggerDelegate
 import io.redspark.candidatos.config.logger.logCreated
+import io.redspark.candidatos.config.logger.logUpdated
 import io.redspark.candidatos.database.entities.Candidate
+import io.redspark.candidatos.database.entities.JobTitle
 import io.redspark.candidatos.database.entities.Skill
 import io.redspark.candidatos.database.repositories.CandidateRepository
 import io.redspark.candidatos.database.repositories.SkillRepository
@@ -46,25 +48,23 @@ class CandidateServiceImpl(
         val candidateDTO = CandidateDTO(createCandidateDTO)
         val candidate = Candidate(candidateDTO)
         candidate.skillList=skillsRepository.findAllById(createCandidateDTO.skillList)
+
         val savedCandidate = candidatesRepository.save(candidate)
         return CandidateDTO(savedCandidate, skillEntityToSkillDTO(candidate.skillList))
     }
 
-    override fun updateCandidate(id: UUID, updateCandidateDTO: UpdateCandidateDTO) {
+    override fun updateCandidate(updateCandidate: UpdateCandidateDTO): CandidateDTO {
+        if (updateCandidate.id == null || candidatesRepository.existsById(updateCandidate.id).not()) {
+            throw ServiceException(ServiceError.CANDIDATE_NOT_FOUND)
+        }
 
-        candidatesRepository.findById(id)
-            .map { candidate ->
-                candidate.name = updateCandidateDTO.name
-                candidate.email = updateCandidateDTO.email
-                candidate.phone = updateCandidateDTO.phone
-                candidate.linkedin = updateCandidateDTO.linkedin
-                candidate.curriculum = updateCandidateDTO.curriculum
-                candidate.source = updateCandidateDTO.source
-                candidate.skillList = skillsRepository.findAllById(updateCandidateDTO.skillList)
+        var candidate = Candidate(updateCandidate)
+        candidate.skillList=skillsRepository.findAllById(updateCandidate.skillList)
+        candidate = candidatesRepository.save(candidate)
+        
+        logger.logUpdated(candidate)
 
-                logger.logCreated(candidate)
-                candidatesRepository.save(candidate)
-            }
+        return CandidateDTO(candidate, skillEntityToSkillDTO(candidate.skillList))
     }
 
     override fun getCandidate(id: UUID): CandidateDTO {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.redspark.candidatos.models.dtos.CandidateDTO
 import io.redspark.candidatos.models.dtos.CreateCandidateDTO
 import io.redspark.candidatos.models.dtos.SkillDTO
+import io.redspark.candidatos.models.dtos.UpdateCandidateDTO
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -68,6 +69,15 @@ data class Candidate(
         source= candidateDTO.source
     )
 
+    constructor(updateCandidateDTO: UpdateCandidateDTO) : this(
+        id = updateCandidateDTO.id,
+        name = updateCandidateDTO.name,
+        email = updateCandidateDTO.email,
+        linkedin = updateCandidateDTO.linkedin,
+        curriculum = updateCandidateDTO.curriculum,
+        phone = updateCandidateDTO.phone,
+        source= updateCandidateDTO.source
+    )
 
 
 }

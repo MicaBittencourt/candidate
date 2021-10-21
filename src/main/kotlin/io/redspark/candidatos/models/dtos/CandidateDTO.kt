@@ -69,6 +69,18 @@ data class CandidateDTO (
         skillList = listOf<SkillDTO>(),
     )
 
+    constructor(updateCandidateDTO: UpdateCandidateDTO): this(
+        id = updateCandidateDTO.id,
+        name = updateCandidateDTO.name,
+        email = updateCandidateDTO.email,
+        phone = updateCandidateDTO.phone,
+        source = updateCandidateDTO.source,
+        linkedin = updateCandidateDTO.linkedin,
+        curriculum = updateCandidateDTO.curriculum,
+        skillList = listOf<SkillDTO>(),
+    )
+
+
 }
 
 
