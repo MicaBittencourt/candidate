@@ -46,7 +46,7 @@ class CandidateController(
     fun createCandidate(@RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
 
     @Secured(Permissions.Constants.ROLE_ADMIN)
-    @PutMapping("{id}", produces = ["application/json"])
+    @PutMapping( produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Altera candidato existente", consumes = "application/json")
     @ApiResponses(value = [
@@ -54,8 +54,9 @@ class CandidateController(
         ApiResponse(code = 401, message = "unauthorized"),
         ApiResponse(code = 404, message = "candidate.not.found")
     ])
-    fun updateCandidate(@PathVariable @Valid id: UUID, @RequestBody @Valid UpdateCandidateDTO: UpdateCandidateDTO) = candidateService.updateCandidate(id, UpdateCandidateDTO)
+    fun updateCandidate(@Valid @RequestBody updateCandidateDTO: UpdateCandidateDTO): CandidateDTO = candidateService.updateCandidate(updateCandidateDTO)
 
+    @Secured(Permissions.Constants.ROLE_USER)
     @GetMapping("{id}", produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Busca candidatos por id", consumes = "application/json")
