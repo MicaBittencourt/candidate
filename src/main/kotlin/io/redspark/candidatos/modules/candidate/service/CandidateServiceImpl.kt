@@ -11,12 +11,14 @@ import io.redspark.candidatos.database.repositories.SkillRepository
 import io.redspark.candidatos.models.dtos.*
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
 
-// TODO - tratar execeçoes de campos nulos id no update
 //TODO - verificar regras para cadastro de skill caso tenha responsabilidade no cadastro do candidato, com existsById
 //TODO - verificar como será vinculado os dados do candidato nas etapas do processo seletivo
 @Service
@@ -61,11 +63,22 @@ class CandidateServiceImpl(
         var candidate = Candidate(updateCandidate)
         candidate.skillList=skillsRepository.findAllById(updateCandidate.skillList)
         candidate = candidatesRepository.save(candidate)
-        
+
         logger.logUpdated(candidate)
 
         return CandidateDTO(candidate, skillEntityToSkillDTO(candidate.skillList))
     }
+
+    override fun searchCandidate(term: String?, pageable: Pageable): Page<CandidateDTO> {
+        val page = if (term == null) {
+            candidatesRepository.findAll(pageable)
+        } else {
+            candidatesRepository.findAllByNameContainingIgnoreCase(term, pageable)
+        }
+
+        return page.map { CandidateDTO(it, skillEntityToSkillDTO(it.skillList))}
+    }
+// no dto altera modo de lista para page?
 
     override fun getCandidate(id: UUID): CandidateDTO {
         val candidate = candidatesRepository.findByIdOrNull(id)?:
