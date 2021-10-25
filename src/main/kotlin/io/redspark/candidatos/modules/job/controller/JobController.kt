@@ -74,7 +74,7 @@ class JobController(
     fun closeJob(@PathVariable id: Long) = jobService.closeJob(id)
 
     @Secured(Permissions.Constants.ROLE_USER)
-    @GetMapping("status", produces = ["application/json"])
+    @GetMapping("search", produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Busca vaga por filtro Status", consumes = "application/json")
     @ApiResponses(value = [
