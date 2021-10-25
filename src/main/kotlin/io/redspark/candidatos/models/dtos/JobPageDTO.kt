@@ -36,7 +36,7 @@ data class JobPageDTO(
         businessUnitName = job.businessUnit.name,
         customerName = job.customer.name,
         jobTitle = job.jobTitle.name,
-        status = if(job.endDate == null) JobStatus.OPENED else JobStatus.CLOSED,
+        status = job.status,
         slaStatus = slaStatus
     )
 

@@ -1,15 +1,15 @@
 package io.redspark.candidatos.modules.job.provider
 
-import io.redspark.candidatos.database.entities.BusinessUnit
-import io.redspark.candidatos.database.entities.Customer
-import io.redspark.candidatos.database.entities.Job
-import io.redspark.candidatos.database.entities.JobTitle
+import io.redspark.candidatos.database.entities.*
 import io.redspark.candidatos.database.repositories.BusinessUnitRepository
 import io.redspark.candidatos.database.repositories.CustomerRepository
 import io.redspark.candidatos.database.repositories.JobRepository
 import io.redspark.candidatos.database.repositories.JobTitleRepository
+import io.redspark.candidatos.models.dtos.JobDTO
+import io.redspark.candidatos.models.enums.JobStatus
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
@@ -36,6 +36,9 @@ class JobProviderImpl(
 
     override fun existsJobById(id: Long): Boolean = jobRepository.existsById(id)
 
-    override fun updateJobEndDate(id: Long, endDate: LocalDateTime) = jobRepository.updateEndDate(id, endDate)
+    override fun updateJobEndDate(id: Long, endDate: LocalDateTime, status: JobStatus) = jobRepository.updateEndDate(id, endDate, status)
+
+    override fun findAllByStatus(status: JobStatus, pageable: Pageable): Page<Job> = jobRepository.findByStatus(status, pageable)
+    override fun findAll(searchJobSpecification: Specification<Job>, pageable: Pageable): Page<Job> = jobRepository.findAll(searchJobSpecification, pageable)
 
 }

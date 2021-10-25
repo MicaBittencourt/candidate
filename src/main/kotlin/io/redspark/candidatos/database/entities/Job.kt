@@ -1,6 +1,7 @@
 package io.redspark.candidatos.database.entities
 
 import io.redspark.candidatos.models.dtos.JobCreateDTO
+import io.redspark.candidatos.models.enums.JobStatus
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -44,7 +45,11 @@ class Job(
     val candidateProfile: String,
 
     @Column(name = "end_date")
-    val endDate: LocalDateTime?
+    val endDate: LocalDateTime?,
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    val status: JobStatus,
 ) {
 
     @CreatedDate
@@ -65,7 +70,8 @@ class Job(
         jobTitle = jobTitle,
         jobDescription = jobCreateDTO.jobDescription,
         candidateProfile = jobCreateDTO.candidateProfile,
-        endDate = null
+        endDate = null,
+        status = JobStatus.OPENED
     )
 
 }
