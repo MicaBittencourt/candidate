@@ -3,7 +3,6 @@ package io.redspark.candidatos.modules.job.service
 import io.redspark.candidatos.models.dtos.JobCreateDTO
 import io.redspark.candidatos.models.dtos.JobDTO
 import io.redspark.candidatos.models.dtos.JobPageDTO
-import io.redspark.candidatos.models.dtos.JobTitleDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 

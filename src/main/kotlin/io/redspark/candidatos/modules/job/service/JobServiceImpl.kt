@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import java.time.Period
 import javax.transaction.Transactional
 
 @Service
@@ -63,7 +64,26 @@ class JobServiceImpl(
     }
 
     private fun getSlaStatus(job: Job): SlaStatus {
-        // TODO Calcular SLA atraves das datas e quantidade de dias
+        //TODO - verificar se Dia+1 é dia util
+        val current = LocalDateTime.now().plusDays(1)
+        val period = Period.between(job.createdDate.toLocalDate(), current.toLocalDate())
+
+        print("dias SLA:"+ period.days)
+        if(period.days <= 10) {
+            return SlaStatus.GREEN
+        }
+        if(period.days >=11 && period.days <= 19) {
+            return SlaStatus.YELLOW
+        }
+        if(period.days >=20 && period.days <= 29) {
+            return SlaStatus.ORANGE
+        }
+        if(period.days >=20 && period.days <= 29) {
+            return SlaStatus.RED
+        }
+        if(period.days >=30) {
+            return SlaStatus.YELLOW
+        }
         return SlaStatus.GREEN
     }
 
