@@ -14,6 +14,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -27,6 +28,7 @@ dependencies {
 	implementation("org.liquibase:liquibase-core:4.4.3")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
 	implementation("com.nimbusds:nimbus-jose-jwt:9.15.2")
+	implementation("au.com.console:kotlin-jpa-specification-dsl:2.0.0-rc.1")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools:2.5.5")
 

@@ -4,9 +4,11 @@ import io.redspark.candidatos.config.logger.LoggerDelegate
 import io.redspark.candidatos.config.logger.logCreated
 import io.redspark.candidatos.config.logger.logUpdated
 import io.redspark.candidatos.database.entities.Job
+import io.redspark.candidatos.database.specifications.JobSpecification
 import io.redspark.candidatos.models.dtos.JobCreateDTO
 import io.redspark.candidatos.models.dtos.JobDTO
 import io.redspark.candidatos.models.dtos.JobPageDTO
+import io.redspark.candidatos.models.enums.JobStatus
 import io.redspark.candidatos.models.enums.SlaStatus
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import javax.transaction.Transactional
+import au.com.console.jpaspecificationdsl.and
 
 @Service
 class JobServiceImpl(
@@ -59,12 +62,25 @@ class JobServiceImpl(
 
         logger.logUpdated(Job::class.java, id, "job closed")
 
-        jobProvider.updateJobEndDate(id, LocalDateTime.now())
+        jobProvider.updateJobEndDate(id, LocalDateTime.now(), JobStatus.CLOSED)
+    }
+
+    override fun searchJob(term: String?, status: JobStatus?, pageable: Pageable): Page<JobDTO> {
+        val jobSpecification = JobSpecification()
+        val searchJobSpecification = and(
+            jobSpecification.searchJob(term),
+            jobSpecification.filterStatus(status)
+        )
+        val pageJob = jobProvider.findAll(searchJobSpecification, pageable)
+
+        return pageJob.map { JobDTO(it, getSlaStatus(it))}
     }
 
     private fun getSlaStatus(job: Job): SlaStatus {
         // TODO Calcular SLA atraves das datas e quantidade de dias
-        return SlaStatus.GREEN
+         return SlaStatus.GREEN
     }
+
+
 
 }
