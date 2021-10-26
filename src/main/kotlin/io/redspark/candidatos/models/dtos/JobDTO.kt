@@ -59,7 +59,7 @@ data class JobDTO(
         candidateProfile = job.candidateProfile,
         createdAt = job.createdDate,
         finishedAt = job.endDate,
-        status = if(job.endDate == null) JobStatus.OPENED else JobStatus.CLOSED,
+        status = job.status,
         slaStatus = slaStatus
     )
 

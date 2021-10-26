@@ -1,12 +1,15 @@
 package io.redspark.candidatos.modules.job.service
 
+import au.com.console.jpaspecificationdsl.and
 import io.redspark.candidatos.config.logger.LoggerDelegate
 import io.redspark.candidatos.config.logger.logCreated
 import io.redspark.candidatos.config.logger.logUpdated
 import io.redspark.candidatos.database.entities.Job
+import io.redspark.candidatos.database.specifications.JobSpecification
 import io.redspark.candidatos.models.dtos.JobCreateDTO
 import io.redspark.candidatos.models.dtos.JobDTO
 import io.redspark.candidatos.models.dtos.JobPageDTO
+import io.redspark.candidatos.models.enums.JobStatus
 import io.redspark.candidatos.models.enums.SlaStatus
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
@@ -14,8 +17,8 @@ import io.redspark.candidatos.modules.job.provider.JobProvider
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.Duration
 import java.time.LocalDateTime
-import java.time.Period
 import javax.transaction.Transactional
 
 @Service
@@ -60,31 +63,31 @@ class JobServiceImpl(
 
         logger.logUpdated(Job::class.java, id, "job closed")
 
-        jobProvider.updateJobEndDate(id, LocalDateTime.now())
+        jobProvider.updateJobEndDate(id, LocalDateTime.now(), JobStatus.CLOSED)
+    }
+
+    override fun searchJob(term: String?, status: JobStatus?, pageable: Pageable): Page<JobDTO> {
+        val jobSpecification = JobSpecification()
+        val searchJobSpecification = and(
+            jobSpecification.searchJob(term),
+            jobSpecification.filterStatus(status)
+        )
+        val pageJob = jobProvider.findAll(searchJobSpecification, pageable)
+
+        return pageJob.map { JobDTO(it, getSlaStatus(it))}
     }
 
     private fun getSlaStatus(job: Job): SlaStatus {
-        //TODO - verificar se Dia+1 é dia util
+        // TODO Calcular SLA atraves das datas e quantidade de dias
         val current = LocalDateTime.now().plusDays(1)
-        val period = Period.between(job.createdDate.toLocalDate(), current.toLocalDate())
-
-        print("dias SLA:"+ period.days)
-        if(period.days <= 10) {
-            return SlaStatus.GREEN
+        val period = Duration.between(job.createdDate.toLocalDate().atStartOfDay(), current.toLocalDate().atStartOfDay())
+        val result = when (period.toDays()){
+            in 0..10 -> SlaStatus.GREEN
+            in 11..19 -> SlaStatus.YELLOW
+            in 20.. 29 -> SlaStatus.ORANGE
+            else -> SlaStatus.RED
         }
-        if(period.days >=11 && period.days <= 19) {
-            return SlaStatus.YELLOW
-        }
-        if(period.days >=20 && period.days <= 29) {
-            return SlaStatus.ORANGE
-        }
-        if(period.days >=20 && period.days <= 29) {
-            return SlaStatus.RED
-        }
-        if(period.days >=30) {
-            return SlaStatus.YELLOW
-        }
-        return SlaStatus.GREEN
+            return result
     }
 
 }

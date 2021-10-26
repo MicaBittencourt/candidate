@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_015
+      author: Ligiane Domingos
+      changes:
+        - addColumn:
+            tableName: job
+            columns:
+              - column:
+                  name: status
+                  type: varchar(100)
+

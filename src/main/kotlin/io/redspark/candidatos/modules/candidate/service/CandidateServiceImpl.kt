@@ -78,7 +78,6 @@ class CandidateServiceImpl(
 
         return page.map { CandidateDTO(it, skillEntityToSkillDTO(it.skillList))}
     }
-// no dto altera modo de lista para page?
 
     override fun getCandidate(id: UUID): CandidateDTO {
         val candidate = candidatesRepository.findByIdOrNull(id)?:
