@@ -4,5 +4,5 @@ enum class SlaStatus {
     GREEN,
     YELLOW,
     RED,
-    BLACK
+    ORANGE
 }

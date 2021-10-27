@@ -3,10 +3,8 @@ package io.redspark.candidatos.modules.job.service
 import io.redspark.candidatos.models.dtos.JobCreateDTO
 import io.redspark.candidatos.models.dtos.JobDTO
 import io.redspark.candidatos.models.dtos.JobPageDTO
-import io.redspark.candidatos.models.dtos.JobTitleDTO
 import io.redspark.candidatos.models.enums.JobStatus
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
 interface JobService {

@@ -1,5 +1,6 @@
 package io.redspark.candidatos.modules.job.service
 
+import au.com.console.jpaspecificationdsl.and
 import io.redspark.candidatos.config.logger.LoggerDelegate
 import io.redspark.candidatos.config.logger.logCreated
 import io.redspark.candidatos.config.logger.logUpdated
@@ -16,9 +17,9 @@ import io.redspark.candidatos.modules.job.provider.JobProvider
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.Duration
 import java.time.LocalDateTime
 import javax.transaction.Transactional
-import au.com.console.jpaspecificationdsl.and
 
 @Service
 class JobServiceImpl(
@@ -78,9 +79,15 @@ class JobServiceImpl(
 
     private fun getSlaStatus(job: Job): SlaStatus {
         // TODO Calcular SLA atraves das datas e quantidade de dias
-         return SlaStatus.GREEN
+        val current = LocalDateTime.now().plusDays(1)
+        val period = Duration.between(job.createdDate.toLocalDate().atStartOfDay(), current.toLocalDate().atStartOfDay())
+        val result = when (period.toDays()){
+            in 0..10 -> SlaStatus.GREEN
+            in 11..19 -> SlaStatus.YELLOW
+            in 20.. 29 -> SlaStatus.ORANGE
+            else -> SlaStatus.RED
+        }
+            return result
     }
-
-
 
 }
