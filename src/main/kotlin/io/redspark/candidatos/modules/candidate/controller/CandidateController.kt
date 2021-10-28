@@ -40,7 +40,7 @@ class CandidateController(
         @RequestParam(value = "size", defaultValue = "10") size: Int,
         @RequestParam(value = "sort", defaultValue = "createdDate") sort: String,
         @RequestParam(value = "direction", defaultValue = "ASC") direction: String
-    ): Page<CandidateDTO> = candidateService.getCandidateList(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(direction), sort)))
+    ): Page<CandidateDTO> = candidateService.getCandidatePage(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(direction), sort)))
 
     @Secured(Permissions.Constants.ROLE_ADMIN)
     @PostMapping(produces = ["application/json"])
