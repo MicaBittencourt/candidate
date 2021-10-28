@@ -17,6 +17,7 @@ import io.redspark.candidatos.modules.job.provider.JobProvider
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.DayOfWeek
 import java.time.Duration
 import java.time.LocalDateTime
 import javax.transaction.Transactional
@@ -78,9 +79,14 @@ class JobServiceImpl(
     }
 
     private fun getSlaStatus(job: Job): SlaStatus {
-        // TODO Calcular SLA atraves das datas e quantidade de dias
-        val current = LocalDateTime.now().plusDays(1)
-        val period = Duration.between(job.createdDate.toLocalDate().atStartOfDay(), current.toLocalDate().atStartOfDay())
+        var current = LocalDateTime.now().toLocalDate()
+        if (current.dayOfWeek == DayOfWeek.FRIDAY){
+            current = current.plusDays(2)
+        } else   if (current.dayOfWeek == DayOfWeek.SATURDAY){
+            current = current.plusDays(1)
+        }
+        current = current.plusDays(1)
+        val period = Duration.between(job.createdDate.toLocalDate().atStartOfDay(), current.atStartOfDay())
         val result = when (period.toDays()){
             in 0..10 -> SlaStatus.GREEN
             in 11..19 -> SlaStatus.YELLOW
