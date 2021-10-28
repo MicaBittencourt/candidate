@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable
 import java.util.*
 
 interface CandidateService {
-    fun getCandidateList(): List<CandidateDTO>
+    fun getCandidatePage(pageable: Pageable): Page<CandidateDTO>
     fun createCandidate(createCandidateDTO: CreateCandidateDTO): CandidateDTO
     fun getCandidate(id: UUID): CandidateDTO
     fun updateCandidate(updateCandidateDTO: UpdateCandidateDTO): CandidateDTO
