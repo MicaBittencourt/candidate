@@ -35,7 +35,12 @@ class CandidateController(
         ApiResponse(code = 200, message = "Retorna todos candidatos cadastrados", response = CandidateDTO::class),
         ApiResponse(code = 401, message = "unauthorized")
     ])
-    fun getCandidateList(@RequestHeader(HttpHeaders.AUTHORIZATION) email: String): List<CandidateDTO> = candidateService.getCandidateList()
+    fun getCandidatePage(
+        @RequestParam(value = "page", defaultValue = "0") page: Int,
+        @RequestParam(value = "size", defaultValue = "10") size: Int,
+        @RequestParam(value = "sort", defaultValue = "createdDate") sort: String,
+        @RequestParam(value = "direction", defaultValue = "ASC") direction: String
+    ): Page<CandidateDTO> = candidateService.getCandidateList(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(direction), sort)))
 
     @Secured(Permissions.Constants.ROLE_ADMIN)
     @PostMapping(produces = ["application/json"])
