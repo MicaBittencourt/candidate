@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiResponses
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.security.access.annotation.Secured
 import org.springframework.validation.annotation.Validated
@@ -47,22 +46,22 @@ class CandidateController(
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Cadastra candidato", consumes = "application/json")
     @ApiResponses(value = [
-        ApiResponse(code = 201, message = "Retorna skill cadastrada", response = CreateCandidateDTO::class),
+        ApiResponse(code = 201, message = "Retorna skill cadastrada", response = CandidateSaveDTO::class),
         ApiResponse(code = 400, message = "content.length.field.required"),
         ApiResponse(code = 401, message = "unauthorized")
     ])
-    fun createCandidate(@RequestBody @Valid createCandidateDTO: CreateCandidateDTO): CandidateDTO = candidateService.createCandidate(createCandidateDTO)
+    fun createCandidate(@RequestBody @Valid candidateSaveDTO: CandidateSaveDTO): CandidateDTO = candidateService.createCandidate(candidateSaveDTO)
 
     @Secured(Permissions.Constants.ROLE_ADMIN)
     @PutMapping( produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Altera candidato existente", consumes = "application/json")
     @ApiResponses(value = [
-        ApiResponse(code = 200, message = "Retorna candidato",response = UpdateCandidateDTO::class),
+        ApiResponse(code = 200, message = "Retorna candidato",response = CandidateSaveDTO::class),
         ApiResponse(code = 401, message = "unauthorized"),
         ApiResponse(code = 404, message = "candidate.not.found")
     ])
-    fun updateCandidate(@Valid @RequestBody updateCandidateDTO: UpdateCandidateDTO): CandidateDTO = candidateService.updateCandidate(updateCandidateDTO)
+    fun updateCandidate(@Valid @RequestBody updateCandidateDTO: CandidateSaveDTO): CandidateDTO = candidateService.updateCandidate(updateCandidateDTO)
 
     @Secured(Permissions.Constants.ROLE_USER)
     @GetMapping("{id}", produces = ["application/json"])
