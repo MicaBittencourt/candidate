@@ -46,7 +46,6 @@ data class Candidate(
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_title_id")
     val jobTitle: JobTitle,
-
 ){
 
     @CreatedDate
@@ -67,9 +66,7 @@ data class Candidate(
             source= candidateSaveDTO.source,
             jobTitle = jobTitle,
             skillList = skillList
-
     )
-
 
 }
 

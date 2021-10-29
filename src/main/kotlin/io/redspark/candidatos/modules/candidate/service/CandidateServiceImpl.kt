@@ -8,6 +8,7 @@ import io.redspark.candidatos.database.repositories.CandidateRepository
 import io.redspark.candidatos.database.repositories.JobTitleRepository
 import io.redspark.candidatos.database.repositories.SkillRepository
 import io.redspark.candidatos.models.dtos.CandidateDTO
+import io.redspark.candidatos.models.dtos.CandidatePageDTO
 import io.redspark.candidatos.models.dtos.CandidateSaveDTO
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
@@ -17,7 +18,6 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 
-//TODO - verificar como será vinculado os dados do candidato nas etapas do processo seletivo
 @Service
 class CandidateServiceImpl(
     private val candidatesRepository: CandidateRepository,
@@ -27,12 +27,11 @@ class CandidateServiceImpl(
 ) : CandidateService {
     private val logger by LoggerDelegate()
 
-    override fun getCandidatePage(pageable: Pageable): Page<CandidateDTO> {
+    override fun getCandidatePage(pageable: Pageable): Page<CandidatePageDTO> {
         val candidateList = candidatesRepository.findAll(pageable)
         return candidateList.map {
-            return@map CandidateDTO(it)}
+            return@map CandidatePageDTO(it)}
     }
-
 
     override fun createCandidate(candidateSaveDTO: CandidateSaveDTO): CandidateDTO {
         if (candidateSaveDTO.id != null) {

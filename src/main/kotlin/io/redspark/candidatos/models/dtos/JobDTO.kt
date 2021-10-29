@@ -45,7 +45,7 @@ data class JobDTO(
 
     @JsonProperty("slaStatus")
     val slaStatus: SlaStatus
-) {
+){
 
     constructor(job: Job, slaStatus: SlaStatus) : this (
         id = job.id,

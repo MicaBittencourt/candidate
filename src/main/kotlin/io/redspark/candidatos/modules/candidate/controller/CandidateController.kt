@@ -31,7 +31,7 @@ class CandidateController(
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Busca todos candidatos cadastrados", consumes = "application/json")
     @ApiResponses(value = [
-        ApiResponse(code = 200, message = "Retorna todos candidatos cadastrados", response = CandidateDTO::class),
+        ApiResponse(code = 200, message = "Retorna todos candidatos cadastrados", response = CandidatePageDTO::class),
         ApiResponse(code = 401, message = "unauthorized")
     ])
     fun getCandidatePage(
@@ -39,7 +39,7 @@ class CandidateController(
         @RequestParam(value = "size", defaultValue = "10") size: Int,
         @RequestParam(value = "sort", defaultValue = "createdDate") sort: String,
         @RequestParam(value = "direction", defaultValue = "ASC") direction: String
-    ): Page<CandidateDTO> = candidateService.getCandidatePage(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(direction), sort)))
+    ): Page<CandidatePageDTO> = candidateService.getCandidatePage(PageRequest.of(page, size, Sort.by(Sort.Direction.valueOf(direction), sort)))
 
     @Secured(Permissions.Constants.ROLE_ADMIN)
     @PostMapping(produces = ["application/json"])
