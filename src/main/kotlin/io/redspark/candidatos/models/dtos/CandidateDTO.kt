@@ -12,7 +12,7 @@ data class CandidateDTO (
     @JsonProperty("id")
     val id: UUID? = null,
 
-    @JsonProperty("name")
+    @JsonProperty("candidateName")
     @field:NotEmpty
     @field:NotNull
     var name: String,
@@ -31,7 +31,7 @@ data class CandidateDTO (
     @field:NotNull
     var curriculum: String,
 
-    @JsonProperty("phone")
+    @JsonProperty("telephone")
     @field:NotEmpty
     @field:NotNull
     var phone: String,
@@ -41,12 +41,12 @@ data class CandidateDTO (
     @field:NotNull
     var source: String,
 
-    @JsonProperty("skillList")
+    @JsonProperty("skill")
     @field:NotEmpty
     @field:NotNull
     var skillList: List<SkillDTO>,
 
-    @JsonProperty("jobTitle")
+    @JsonProperty("fieldOfAction ")
     val jobTitle: JobTitleDTO
 
 ){

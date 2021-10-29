@@ -4,11 +4,11 @@ import io.redspark.candidatos.config.logger.LoggerDelegate
 import io.redspark.candidatos.config.logger.logCreated
 import io.redspark.candidatos.config.logger.logUpdated
 import io.redspark.candidatos.database.entities.Candidate
-import io.redspark.candidatos.database.entities.Skill
 import io.redspark.candidatos.database.repositories.CandidateRepository
 import io.redspark.candidatos.database.repositories.JobTitleRepository
 import io.redspark.candidatos.database.repositories.SkillRepository
-import io.redspark.candidatos.models.dtos.*
+import io.redspark.candidatos.models.dtos.CandidateDTO
+import io.redspark.candidatos.models.dtos.CandidateSaveDTO
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
 import org.springframework.data.domain.Page
@@ -33,13 +33,6 @@ class CandidateServiceImpl(
             return@map CandidateDTO(it)}
     }
 
-//    fun skillEntityToSkillDTO(skillsList: List<Skill>): List<SkillDTO> {
-//        var skillsDTO = mutableListOf<SkillDTO>()
-//        for (skill in skillsList) {
-//            skillsDTO.add(SkillDTO(skill))
-//        }
-//        return skillsDTO
-//    }
 
     override fun createCandidate(candidateSaveDTO: CandidateSaveDTO): CandidateDTO {
         if (candidateSaveDTO.id != null) {
