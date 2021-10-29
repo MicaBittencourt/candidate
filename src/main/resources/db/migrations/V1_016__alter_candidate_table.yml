@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: V1_016
+      author: Paloma Toledo
+      changes:
+        - addColumn:
+            tableName: candidate
+            columns:
+              - column:
+                  name: job_title_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                baseColumnNames: job_title_id
+                baseTableName: candidate
+                constraintName: fk_candidate_job_title
+                referencedColumnNames: job_title_id
+                referencedTableName: job_title
+
+
+
+
+
+

@@ -6,7 +6,7 @@ import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
-data class CreateCandidateDTO (
+data class CandidateSaveDTO (
 
     @JsonProperty("id")
     val id: UUID? = null,
@@ -44,5 +44,9 @@ data class CreateCandidateDTO (
     @field:NotEmpty
     @field:NotNull
     var skillList: List<Long>,
+
+    @JsonProperty("jobTitle")
+    @field:NotNull
+    val jobTitleId: Long,
 
 )

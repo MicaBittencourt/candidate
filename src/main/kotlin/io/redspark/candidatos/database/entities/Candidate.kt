@@ -1,10 +1,7 @@
 package io.redspark.candidatos.database.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.redspark.candidatos.models.dtos.CandidateDTO
-import io.redspark.candidatos.models.dtos.CreateCandidateDTO
-import io.redspark.candidatos.models.dtos.SkillDTO
-import io.redspark.candidatos.models.dtos.UpdateCandidateDTO
+import io.redspark.candidatos.models.dtos.CandidateSaveDTO
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -46,9 +43,9 @@ data class Candidate(
     @JsonIgnoreProperties("candidate")
     var skillList: List<Skill> = emptyList(),
 
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
-    var stagelList: List<Stage> = emptyList()
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "job_title_id")
+    val jobTitle: JobTitle,
 ){
 
     @CreatedDate
@@ -59,26 +56,17 @@ data class Candidate(
     @Column(name = "updated_date")
     lateinit var updatedDate: LocalDateTime
 
-    constructor(candidateDTO: CandidateDTO): this(
-        id = candidateDTO.id,
-        name = candidateDTO.name,
-        email = candidateDTO.email,
-        linkedin = candidateDTO.linkedin,
-        curriculum = candidateDTO.curriculum,
-        phone = candidateDTO.phone,
-        source= candidateDTO.source
+    constructor(candidateSaveDTO: CandidateSaveDTO, jobTitle: JobTitle, skillList: List<Skill>): this(
+            id = candidateSaveDTO.id,
+            name = candidateSaveDTO.name,
+            email = candidateSaveDTO.email,
+            linkedin = candidateSaveDTO.linkedin,
+            curriculum = candidateSaveDTO.curriculum,
+            phone = candidateSaveDTO.phone,
+            source= candidateSaveDTO.source,
+            jobTitle = jobTitle,
+            skillList = skillList
     )
-
-    constructor(updateCandidateDTO: UpdateCandidateDTO) : this(
-        id = updateCandidateDTO.id,
-        name = updateCandidateDTO.name,
-        email = updateCandidateDTO.email,
-        linkedin = updateCandidateDTO.linkedin,
-        curriculum = updateCandidateDTO.curriculum,
-        phone = updateCandidateDTO.phone,
-        source= updateCandidateDTO.source
-    )
-
 
 }
 
