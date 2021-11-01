@@ -39,6 +39,7 @@ class JobProviderImpl(
     override fun updateJobEndDate(id: Long, endDate: LocalDateTime, status: JobStatus) = jobRepository.updateEndDate(id, endDate, status)
 
     override fun findAllByStatus(status: JobStatus, pageable: Pageable): Page<Job> = jobRepository.findByStatus(status, pageable)
+
     override fun findAll(searchJobSpecification: Specification<Job>, pageable: Pageable): Page<Job> = jobRepository.findAll(searchJobSpecification, pageable)
 
 }

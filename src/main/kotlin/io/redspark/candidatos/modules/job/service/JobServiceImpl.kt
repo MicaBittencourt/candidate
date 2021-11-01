@@ -13,13 +13,14 @@ import io.redspark.candidatos.models.enums.JobStatus
 import io.redspark.candidatos.models.enums.SlaStatus
 import io.redspark.candidatos.models.errors.ServiceError
 import io.redspark.candidatos.models.errors.ServiceException
+import io.redspark.candidatos.models.extensions.workingDaysFromDate
 import io.redspark.candidatos.modules.job.provider.JobProvider
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.time.Duration
 import java.time.LocalDateTime
 import javax.transaction.Transactional
+
 
 @Service
 class JobServiceImpl(
@@ -78,16 +79,15 @@ class JobServiceImpl(
     }
 
     private fun getSlaStatus(job: Job): SlaStatus {
-        // TODO Calcular SLA atraves das datas e quantidade de dias
-        val current = LocalDateTime.now().plusDays(1)
-        val period = Duration.between(job.createdDate.toLocalDate().atStartOfDay(), current.toLocalDate().atStartOfDay())
-        val result = when (period.toDays()){
+        var createdDate = job.createdDate.plusDays(1)
+        var workingDays = LocalDateTime.now().toLocalDate().atTime(23,59,59).workingDaysFromDate(createdDate)
+        val result = when (workingDays){
             in 0..10 -> SlaStatus.GREEN
             in 11..19 -> SlaStatus.YELLOW
             in 20.. 29 -> SlaStatus.ORANGE
             else -> SlaStatus.RED
         }
-            return result
+        return result
     }
 
 }
