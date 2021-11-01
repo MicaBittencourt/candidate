@@ -1,7 +1,6 @@
 package io.redspark.candidatos.database.repositories
 
 import io.redspark.candidatos.database.entities.Job
-import io.redspark.candidatos.database.entities.JobTitle
 import io.redspark.candidatos.models.enums.JobStatus
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
