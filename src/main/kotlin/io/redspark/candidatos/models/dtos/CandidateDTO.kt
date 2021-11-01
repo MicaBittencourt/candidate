@@ -12,7 +12,7 @@ data class CandidateDTO (
     @JsonProperty("id")
     val id: UUID? = null,
 
-    @JsonProperty("name")
+    @JsonProperty("candidateName")
     @field:NotEmpty
     @field:NotNull
     var name: String,
@@ -31,7 +31,7 @@ data class CandidateDTO (
     @field:NotNull
     var curriculum: String,
 
-    @JsonProperty("phone")
+    @JsonProperty("telephone")
     @field:NotEmpty
     @field:NotNull
     var phone: String,
@@ -41,43 +41,26 @@ data class CandidateDTO (
     @field:NotNull
     var source: String,
 
-    @JsonProperty("skillList")
+    @JsonProperty("skill")
     @field:NotEmpty
     @field:NotNull
     var skillList: List<SkillDTO>,
 
+    @JsonProperty("fieldOfAction ")
+    val jobTitle: JobTitleDTO
+
 ){
-    constructor(candidate: Candidate, skillList: List<SkillDTO>): this(
-        id = candidate.id,
-        name = candidate.name,
-        email = candidate.email,
-        phone = candidate.phone,
-        source = candidate.source,
-        linkedin = candidate.linkedin,
-        curriculum = candidate.curriculum,
-        skillList = skillList,
-    )
+    constructor(candidate: Candidate): this(
+            id = candidate.id,
+            name = candidate.name,
+            email = candidate.email,
+            phone = candidate.phone,
+            source = candidate.source,
+            linkedin = candidate.linkedin,
+            curriculum = candidate.curriculum,
+            skillList = candidate.skillList.map { SkillDTO(it) },
+            jobTitle = JobTitleDTO(candidate.jobTitle)
 
-    constructor(createCandidateDTO: CreateCandidateDTO): this(
-        id = createCandidateDTO.id,
-        name = createCandidateDTO.name,
-        email = createCandidateDTO.email,
-        phone = createCandidateDTO.phone,
-        source = createCandidateDTO.source,
-        linkedin = createCandidateDTO.linkedin,
-        curriculum = createCandidateDTO.curriculum,
-        skillList = listOf<SkillDTO>(),
-    )
-
-    constructor(updateCandidateDTO: UpdateCandidateDTO): this(
-        id = updateCandidateDTO.id,
-        name = updateCandidateDTO.name,
-        email = updateCandidateDTO.email,
-        phone = updateCandidateDTO.phone,
-        source = updateCandidateDTO.source,
-        linkedin = updateCandidateDTO.linkedin,
-        curriculum = updateCandidateDTO.curriculum,
-        skillList = listOf<SkillDTO>(),
     )
 
 
